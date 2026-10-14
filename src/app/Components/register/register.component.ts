@@ -5,10 +5,10 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss'],
-    standalone: false
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
+  standalone: false,
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({
@@ -30,12 +30,15 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [
       Validators.required,
-      Validators.pattern(/^(?=.*[A-Za-z])(?=.*[@$!%*#?&^_-]).{8,}/),
+      Validators.pattern(/^(?=.*[A-Za-z])(?=.*[@$!%*#?&^_-]).{8,}$/),
     ]),
   });
   callRegister: Subject<any> = new Subject();
   errorMessage: string = '';
-  constructor(private _authService: AuthService, private _router: Router) {}
+  constructor(
+    private _authService: AuthService,
+    private _router: Router,
+  ) {}
 
   ngOnInit(): void {}
 
@@ -46,7 +49,7 @@ export class RegisterComponent implements OnInit {
         .pipe(takeUntil(this.callRegister))
         .subscribe((response) => {
           // console.log(response);
-          if (response.message == 'sucsess') {
+          if (response.message == 'success') {
             this._router.navigate(['/login']);
           } else {
             this.errorMessage = response.message;

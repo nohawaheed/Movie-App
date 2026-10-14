@@ -5,21 +5,21 @@ import { AuthService } from 'src/app/auth.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
-    standalone: false
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  standalone: false
 })
 export class LoginComponent implements OnInit {
-  constructor(private _authService: AuthService, private _router: Router) {}
+  constructor(private _authService: AuthService, private _router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   callLogin: Subject<any> = new Subject();
   errorMessage: string = '';
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [
-      (Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*[@$!%*#?&^_-]).{8,}/)),
+      (Validators.required, Validators.pattern(/^(?=.*[A-Za-z])(?=.*[@$!%*#?&^_-]).{8,}$/)),
     ]),
   });
   loginUser(form: FormGroup) {
