@@ -9,7 +9,10 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private _httpClient: HttpClient, private _router: Router) {
+  constructor(
+    private _httpClient: HttpClient,
+    private _router: Router,
+  ) {
     if (localStorage.getItem('loginToken')) {
       this.saveUser();
     }
@@ -18,14 +21,14 @@ export class AuthService {
   userData: BehaviorSubject<any> = new BehaviorSubject(null);
   register(userRegisterData: User): Observable<any> {
     return this._httpClient.post(
-      'https://exam.elevateegy.com/api/v1/auth/signup',
-      userRegisterData
+      'https://authentication-api-c9a13.containers.snapdeploy.app/api/v1/auth/register',
+      userRegisterData,
     );
   }
   signIn(userSignInData: User): Observable<any> {
     return this._httpClient.post(
-      'https://exam.elevateegy.com/api/v1/auth/signin',
-      userSignInData
+      'https://authentication-api-c9a13.containers.snapdeploy.app/api/v1/auth/login',
+      userSignInData,
     );
   }
 
